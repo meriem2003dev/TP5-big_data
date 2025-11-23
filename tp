@@ -1,0 +1,109 @@
+icrosoft Windows [Version 10.0.19045.6093]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\INFOLAB>cd "C:\mongodb-win32-x86_64-2008plus-2.6.4 (1)\mongodb-win32-x86_64-2008plus-2.6.4\bin"
+
+C:\mongodb-win32-x86_64-2008plus-2.6.4 (1)\mongodb-win32-x86_64-2008plus-2.6.4\bin>mongo.exe
+MongoDB shell version: 2.6.4
+connecting to: test
+Welcome to the MongoDB shell.
+For interactive help, type "help".
+For more comprehensive documentation, see
+        http://docs.mongodb.org/
+Questions? Try the support group
+        http://groups.google.com/group/mongodb-user
+> show dbs
+admin  (empty)
+local  0.031GB
+> use test
+switched to db test
+> db.students.insert({name:"meriem",level:AI})
+2025-11-15T13:23:55.848+0100 ReferenceError: AI is not defined
+> db.students.insert({name:"meriem",level:"AI"})
+WriteResult({ "nInserted" : 1 })
+> db.students.find()
+{ "_id" : ObjectId("6918712070a41255787c4304"), "name" : "meriem", "level" : "AI" }
+> db.students.insert({name:"meriem",level:"AI",age:22})
+WriteResult({ "nInserted" : 1 })
+> db.students.find()
+{ "_id" : ObjectId("6918712070a41255787c4304"), "name" : "meriem", "level" : "AI" }
+{ "_id" : ObjectId("6918725070a41255787c4305"), "name" : "meriem", "level" : "AI", "age" : 22 }
+> db.students.findOne()
+{
+        "_id" : ObjectId("6918712070a41255787c4304"),
+        "name" : "meriem",
+        "level" : "AI"
+}
+> db.students.find().pretty()
+{
+        "_id" : ObjectId("6918712070a41255787c4304"),
+        "name" : "meriem",
+        "level" : "AI"
+}
+{
+        "_id" : ObjectId("6918725070a41255787c4305"),
+        "name" : "meriem",
+        "level" : "AI",
+        "age" : 22
+}
+> db.student.update({name:"meriem"},{$set: {level:"ML"}})
+WriteResult({ "nMatched" : 0, "nUpserted" : 0, "nModified" : 0 })
+> db.students.find().pretty()
+{
+        "_id" : ObjectId("6918712070a41255787c4304"),
+        "name" : "meriem",
+        "level" : "AI"
+}
+{
+        "_id" : ObjectId("6918725070a41255787c4305"),
+        "name" : "meriem",
+        "level" : "AI",
+        "age" : 22
+}
+> db.students.update({name:"meriem"},{$set: {level:"ML"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.students.find().pretty()
+{
+        "_id" : ObjectId("6918712070a41255787c4304"),
+        "name" : "meriem",
+        "level" : "ML"
+}
+{
+        "_id" : ObjectId("6918725070a41255787c4305"),
+        "name" : "meriem",
+        "level" : "AI",
+        "age" : 22
+}
+> db.students.remove({name:"meriem"})
+WriteResult({ "nRemoved" : 2 })
+> db.students.find().pretty()
+> db.students.find().pretty()
+> show dbs
+admin  (empty)
+local  0.031GB
+test   0.031GB
+> show collections
+students
+system.indexes
+> db.students.help()
+DBCollection help
+        db.students.find().help() - show DBCursor help
+        db.students.count()
+        db.students.copyTo(newColl) - duplicates collection by copying all documents to newColl; no indexes are copied.
+        db.students.convertToCapped(maxBytes) - calls {convertToCapped:'students', size:maxBytes}} command
+        db.students.dataSize()
+        db.students.distinct( key ) - e.g. db.students.distinct( 'x' )
+        db.students.drop() drop the collection
+        db.students.dropIndex(index) - e.g. db.students.dropIndex( "indexName" ) or db.students.dropIndex( { "indexKey" : 1 } )
+        db.students.dropIndexes()
+        db.students.ensureIndex(keypattern[,options]) - options is an object with these possible fields: name, unique, dropDups
+        db.students.reIndex()
+        db.students.find([query],[fields]) - query is an optional query filter. fields is optional set of fields to return.
+                                                      e.g. db.students.find( {x:77} , {name:1, x:1} )
+        db.students.find(...).count()
+        db.students.find(...).limit(n)
+        db.students.find(...).skip(n)
+        db.students.find(...).sort(...)
+        db.students.findOne([query])
+        db.students.findAndModify( { update : ... , remove : bool [, query: {}, sort: {}, 'new': false] } )
+        db.students.getDB() get DB object associated with collection
